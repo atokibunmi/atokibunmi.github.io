@@ -1,0 +1,1561 @@
+/*=============== GOOGLE FONTS ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Exo:wght@400;500;600&display=swap");
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+  --header-height: 3.5rem;
+
+  /*========== Colors ==========*/
+  /*Color mode HSL(hue, saturation, lightness)*/
+  --first-color: hsl(219, 69%, 56%);
+  --first-color-alt: hsl(219, 69%, 52%);
+  --title-color: hsl(219, 8%, 95%);
+  --text-color: hsl(219, 8%, 75%);
+  --text-color-light: hsl(219, 4%, 55%);
+  --white-color: #fff;
+  --body-color: hsl(219, 4%, 4%);
+  --container-color: hsl(219, 4%, 7%);
+
+  /*========== Font and typography ==========*/
+  /*.5rem = 8px | 1rem = 16px ...*/
+  --body-font: 'Exo', sans-serif;
+  --h1-font-size: 1.5rem;
+  --h2-font-size: 1.25rem;
+  --h3-font-size: 1rem;
+  --normal-font-size: .938rem;
+  --small-font-size: .813rem;
+  --smaller-font-size: .75rem;
+
+  /*========== Font weight ==========*/
+  --font-medium: 500;
+  --font-semi-bold: 600;
+
+  /*========== z index ==========*/
+  --z-tooltip: 10;
+  --z-fixed: 100;
+}
+
+/*Responsive Typography*/
+@media screen and (min-width: 968px) {
+  :root {
+    --h1-font-size: 2.25rem;
+    --h2-font-size: 1.5rem;
+    --h3-font-size: 1.25rem;
+    --normal-font-size: 1rem;
+    --small-font-size: .875rem;
+    --smaller-font-size: .813rem;
+  }
+
+}
+
+/*=============== BASE ===============*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  z-index: 100;
+}
+
+.filt{
+  color: var(--text-color);
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  /* -45deg, #e73c7e, #ee7752, #23a6d5, #23d5ab  */
+  animation: change 10s ease-in-out infinite;
+  backdrop-filter: blur(20px);
+}
+
+@keyframes change {
+    0%{
+        background-position: 0 50%;
+    }
+    50%{
+        background-position: 100% 50%;
+    }
+    100%{
+        background-position: 0 50%;
+    }
+}
+
+h1, h2, h3 {
+  color: var(--title-color);
+  font-weight: var(--font-semi-bold);
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/*=============== REUSABLE CSS CLASSES ===============*/
+.container {
+  max-width: 1024px;
+  margin-right: 1.5rem;
+  margin-left: 1.5rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.section {
+  padding: 4.5rem 0 2rem;
+}
+
+.section__title {
+  font-size: var(--h2-font-size);
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.main {
+  overflow: hidden;
+}
+
+.shape{
+  background-color: hsla(219, 33%, 32%, 0.5);
+  /* filter: blur(112px);  */
+  border-radius: 50%;
+  backdrop-filter: blur(150px);
+}
+
+.shape__big{
+  width: 400px;
+  height: 400px;
+}
+
+.shape__small{
+  width: 300px; 
+  height: 300px;
+}
+
+.shape__smaller{
+  width: 180px;
+  height: 180px;
+  filter: blur(64px);
+}
+/*=============== HEADER & NAV ===============*/
+.header{
+  width: 100%;
+  background-color: transparent;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--z-fixed);
+  
+}
+
+#header{
+  width: 100%;
+  background-color: transparent;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--z-fixed);
+}
+
+.nav{
+  height: var(--header-height);
+  /* These two allow you make the two divs inline and spaces them and the a tag equally  */
+  display: flex;
+  /* justifies the items to the left and right edges and adds uniform space between them  */
+  justify-content: space-between;
+  /* Aligns the item in the middle Vertically */
+  align-items: center;
+  /* border: 3px solid rgb(13, 174, 104);  */
+
+}
+
+.nav__logo,
+.nav__toggle{
+  color: var(--title-color);
+  /* border: 1px solid coral;  */
+  /* Set (logo + name) container as inline with elements inside it having no space from each other */
+  display: inline-flex;
+}
+
+.nav__logo{
+  /* Allows you align the elements (logo +name) inside it to the center i.e both vertically and horizontally */
+  align-items: center;
+  /* Allows you set horizontal space between elements inside it */
+  column-gap: 0.25rem;
+  font-weight: var(--font-medium);
+  transition: 0.3s;
+}
+
+.nav__logo i{
+  font-size: 1.25rem;
+}
+
+.nav__logo:hover{
+  color: var(--first-color);
+}
+
+.nav__toggle{
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+/* For mobile screen only at max 767px */
+@media screen and (max-width: 767px) {
+  .nav__menu{
+    position: fixed;
+    background-color: hsla(0, 0%, 100%, .1);
+    top: 0;
+    /* set to -100 to remove entirely from screen and bring back with javascript  */
+    right: -100%;
+    width: 100%;
+    height: 100%;
+    /* Allow you blur everything asides element where it is set  */
+    backdrop-filter: blur(96px);
+    -webkit-backdrop-filter: blur(96px);
+    transition: 0.3s;
+    /* border: 1px solid blue;  */
+  }
+}
+
+.nav__list{
+  /* Making Nav list a flex color-interpolation-filters */
+  display: flex;
+  /* Make flex container elements arrange vertically, horizontal is default */
+  flex-direction: column;
+  /* border: 3px solid coral;  */
+  /* Align text to center of nav__list box i.e flex container  */
+  text-align: center;
+  /* set vertical gap between each element  */
+  row-gap: 3rem;
+  padding-top: 9rem;
+}
+
+.nav__link{
+  text-transform: uppercase;
+  color: var(--title-color);
+  font-size: var(--h2-font-size);
+  font-weight: var(--font-medium);
+  /* Specifies how much time a change in the css property will take to have effect; like colour change during hover  */
+  transition: .3s;
+}
+
+.nav__link:hover{
+  color: var(--first-color);
+}
+
+.nav__close{
+  font-size: 2rem;
+  color: var(--white-color);
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+
+}
+/* li{
+
+} */
+
+/* Show menu */
+/* When triggered, nav__menu gets two conflicting right values and picks the bottom most one; 0*/
+.show-menu{
+  right: 0;
+}
+
+/* Change background header */
+.scroll-header{
+  background-color: var(--body-color);
+  border-radius: 0 0 1rem 1rem;
+}
+
+/* Active link */
+.active-link{
+  color: var(--first-color);
+}
+
+/*=============== HOME ===============*/
+.home{
+  position: relative;
+  overflow: hidden;
+}
+
+.home__container{
+  position: relative;
+  /* padding-top: 4rem;  */
+  row-gap: 3.2rem;
+}
+
+.home__data{
+  text-align: center;
+
+}
+
+.home__title{
+  font-size: var(--h1-font-size);
+  margin-bottom: 1rem;
+  /* border: 1px solid coral;  */
+}
+
+.home__subtitle{
+  font-size: var(--h3-font-size);
+  margin-bottom: 0.25rem;
+}
+
+.home__elec{
+  font-size: var(--small-font-size);
+  font-weight: 400;
+  color: var(--text-color);
+  /* border: 1px solid coral;  */
+  display: inline-flex;
+  align-items: center;
+  column-gap: 0.25rem;
+}
+
+.home__elec i{
+  color: var(--first-color);
+}
+
+img.headerr{
+  width: 60px;
+  /* position: absolute; */
+  margin: auto;
+  margin-bottom: 3rem;
+}
+
+.home__img{
+  width: 280px;
+  /* Move image to center of page  */
+  justify-self: center;
+}
+
+.home__car{
+  display: flex;
+  /* works just for flex display puts all content together side by side, centralizes and leaves equal spacing to both edges i.e helps for horizontal alignment  */
+  justify-content: center;
+  align-items: center;
+  column-gap: 4rem;
+  margin-bottom: 2rem;
+  /* border: 1px solid coral;  */
+  width: 355px;
+  margin: 0 auto;
+  color: hsl(219deg 8% 95%);
+}
+
+.home__car-name{
+    font-size: 0.625rem;
+    font-weight: bold;
+    color: hsl(219deg 4% 24%);
+}
+
+.home__car-data{
+  /* center text or picture inside box/element horizontally  */
+  text-align: center;
+
+}
+
+.home__car-number{
+  font-size: var(--h2-font-size);
+  font-weight: var(--font-medium);
+  margin-bottom: 0.25rem;
+}
+
+.home__car-icon{
+  background-color: var(--container-color);
+  border-radius: 50%;
+  padding: 0.376rem;
+  display: inline-flex;
+  /* border: 0.5px solid coral;  */
+    /* works just for flex display puts all content together side by side, centralizes and leaves equal spacing to both edges i.e helps for horizontal alignment  */
+  justify-content: center;
+  align-items: center;
+  font-size: 0.875rem;
+  margin-bottom: 0.75rem;
+}
+
+.home__button{
+  position: relative;
+  border: 2px solid hsl(158, 89%, 30%);
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+    /* works just for flex display puts all content together side by side, centralizes and leaves equal spacing to both edges i.e helps for horizontal alignment  */
+  justify-content: center;
+  /* puts element at horizontal center of page. i.e equal horizontal distance to edge or parent element  */
+  justify-self: center;
+  font-size: var(--small-font-size);
+  color: var(--white-color);
+  font-weight: var(--font-medium);
+} 
+
+.home__button::before{
+  content: '';
+  border: 2px solid hsl(158, 98%, 43%);
+  width: 90px;
+  height: 90px;
+  position: absolute;
+  border-radius: 50%;
+  box-shadow: 0 0 12px hsl(158, 98%, 43%);
+  transition: .3s;
+  animation: button 3s infinite;
+}
+/* Button animate */
+/* To make make start button's outer border glow outwards  */
+@keyframes button {
+  0%{
+    box-shadow: 0 0 12px hsl(158, 98%, 43%);
+  }
+  50%{
+    box-shadow: 0 0 24px hsl(158, 98%, 43%);
+  }
+  100%{
+    box-shadow: 0 0 12px hsl(211, 75%, 50%);
+  }
+}
+
+.home .shape__big, .home .shape__small{
+  position: absolute;
+}
+
+.home .shape__big{
+  left: -9rem;
+  top: -4rem;
+}
+
+.home .shape__small{
+  right: -10rem;
+  bottom: 3rem;
+}
+
+.skills__breakdown{
+  column-gap: 0.5rem;
+}
+/*=============== BUTTON ===============*/
+.button{
+  background-color: var(--first-color);
+  color: var(--white-color);
+  padding: 1rem 2rem;
+  border-radius: .25rem;
+  /* border: 1px solid coral; */
+  transition: .3s;
+  display: flex;
+  margin: 0 auto;
+  width: 170px;
+}
+
+
+.button:hover{
+  background-color: var(--first-color-alt);
+}
+/*=============== ABOUT ===============*/
+.about__container{
+  row-gap: 6rem;
+}
+
+.about__group{
+  position: relative;
+}
+
+.about__img{
+  width: 310px;
+  border-radius: .5rem;
+  filter: blur(0.5px);
+}
+
+.about__card{
+  /* border: 1px solid coral; */
+  width: 180px;
+  /* Since about card is now absolute, other elements wont see it, so previous row gap between container elements will now be between about picture and 'machines with future tech'  */
+  position: absolute;
+  right: 0;
+  bottom: -2.5rem;
+  padding: 1rem .75rem;
+  text-align: center;
+  border-radius: 1.25rem;
+
+}
+
+.about__card-title{
+  font-size: var(--h3-font-size);
+  margin-bottom: .5rem;
+  /* margin-bottom: 1rem; */
+  color: hsl(219deg 8% 95%);
+}
+
+.about__card-description{
+  font-size: var(--smaller-font-size);
+
+}
+
+.about__title{
+  text-align: initial;
+  /* border: 1px solid coral; */
+  margin-bottom: 2rem;
+}
+
+.about__description{
+  margin-bottom: 2rem;
+
+
+}
+/*=============== POPULAR ===============*/
+.popular__container{
+  padding-top: 1rem;
+}
+
+.popular__card{
+  position: relative;
+  width: 238px;
+  padding: 2rem 1.5rem  1.5rem;
+  margin-bottom: 3.5rem;
+  border-radius: 1rem;
+  overflow: hidden;
+  color: var(--text-color);
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  /* -45deg, #e73c7e, #ee7752, #23a6d5, #23d5ab  */
+  animation: change 10s ease-in-out infinite;
+  /* backdrop-filter: blur(20px); */
+}
+
+.popular__card .shape__smaller{
+  position: absolute;
+  top: -2.5rem;
+  left: -2.5em;
+}
+
+.popular__title,
+.popular__subtitle,
+.popular__img{
+  position: relative;
+}
+
+.popular__title{
+  font-size: var(--h2-font-size);
+  margin-bottom: .25rem;
+}
+
+.popular__subtitle{
+  font-size: var(--normal-font-size);
+  color: var(--text-color);
+  font-weight: 400;
+}
+
+.popular__img{
+  width: 160px;
+  margin: .75rem  0 1.25rem 1.5rem;
+  transition: .3s;
+}
+
+.popular__data{
+  display: grid;
+  /* Specifies how many items per row i.e how many columns in the grid  */
+  grid-template-columns: repeat(2, max-content);
+  /* Specifies distance between grid rows and columns respectively */
+  gap: .5rem 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.popular__dataa{
+  width: 100%;
+  height: 100%;
+  margin-bottom: 2rem;
+}
+
+.popular__data-group{
+  /* joins all elements inside flex container created now together with no space  */
+  display: inline-flex;
+  align-items: center;
+  /* add space between columns  */
+  column-gap: .5rem;
+  /* border: 1px solid coral; */
+  font-size: var(--smaller-font-size);
+  color: var(--white-color);
+}
+
+.popular__data i{
+  font-size: 1rem;
+}
+
+.popular__price{
+  font-size: var(--h3-font-size);
+}
+
+.popular__button{
+  /* Turn off button border */
+  border: none;
+  outline: none;
+  padding: .75rem 1rem;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  border-radius: 1rem 0 1rem  0;
+  cursor: pointer;
+}
+
+.popular__button i{
+  font-size: 1.25rem;
+}
+
+/* set what it does to car image in popular when you hover popular card (each car advertised)  */
+.popular__card:hover .popular__img{
+  /* Move image up by .25rem by hovered  */
+  transform: translateY(-.25rem);
+}
+/* Swiper class */
+.swiper-pagination-bullet{
+  background: var(--text-color);
+}
+
+.swiper-pagination-bullet-active{
+  background-color: var(--first-color);
+}
+/*=============== FEATURES ===============*/
+.features{
+  overflow: hidden;
+  position: relative;
+}
+
+.features__container{
+  padding-top: 2rem;
+  /* specifies width of each column  */
+  grid-template-columns: 285px;
+  justify-content: center;
+}
+
+.features__group{
+  display: grid;
+  position: relative;
+  z-index: 10;
+}
+
+.features__img{
+  width: 150px;
+  justify-self: center;
+}
+
+.features__card{
+  width: 112px;
+  background-color: hsla(0, 0%, 100%, .1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16);
+  border-radius: 1.25rem;
+  padding: .75rem 2rem;
+  text-align: center;
+  color: var(--title-color);
+  /* Set entire container to absolute position i.e default value of 0 for top and left  */
+  position: absolute;
+}
+
+.features__card-1{
+  top: 4rem;
+  left: 1.5rem;
+}
+
+.features__card-2{
+  top: 8rem;
+  right: 1rem;
+}
+
+.features__card-3{
+  bottom: 2rem;
+  left: 1.5rem;
+}
+
+.features__card-title{
+  font-size: var(--h3-font-size);
+  margin-bottom: .25rem;
+}
+
+.features__card-description{
+  font-size: var(--smaller-font-size);
+}
+
+.features__map{
+  /* setting the maximum width to the initial width of the image  */
+  max-width: initial;
+  width: 450px;
+  position: absolute;
+  top: 8rem;
+  left: -3rem;
+  /* border: 1px solid coral; */
+  margin: auto;
+  transform: rotate(-22deg);
+}
+/*=============== FEATURED ===============*/
+.featured__container{
+  padding-top: 1rem;
+}
+.featured__filters{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 1rem;
+  margin-bottom: 3.5rem;
+  /* border: 1px solid coral; */
+}
+
+.featured__item{
+  width: 48px;
+  height: 48px;
+  border: none;
+  outline: none;
+  padding: 0.75rem;
+  border-radius: .75rem;
+  background-color: var(--container-color);
+  color: var(--white-color);
+  font-size: var(--normal-font-size);
+  cursor: pointer;
+  transition: .3s;
+}
+
+.featured__item img{
+  width: 1.5rem;
+}
+
+.featured__item span,
+.featured__item img{
+  opacity: 0.3;
+  transition: .3s;
+}
+
+.featured__item:hover{
+  background-color: var(--first-color);
+  opacity: 1;
+}
+
+.featured__item:hover span,
+.featured__item:hover img{
+  opacity: 1;
+}
+
+.featured__content{
+  grid-template-columns: 228px;
+  row-gap: 2.5rem;
+  /* border: 1px solid coral; */
+  justify-content: center;
+}
+
+.featured__card{
+  position: relative;
+  background-color: var(--container-color);
+  padding: 2rem 1.5rem  1.5rem;
+  border-radius: 1rem;
+  /* border: 1px solid coral; */
+}
+
+.featured__card .shape__smaller{
+  position: absolute;
+  inset: 0;
+  margin: auto;
+}
+
+.featured__title,
+.featured__subtittle,
+.featured__img{
+  position: relative;
+}
+
+.featured__title{
+  font-size: var(--h2-font-size);
+  margin-bottom: .25rem;
+}
+
+.featured__subtittle{
+  font-size: var(--normal-font-size);
+  color: var(--text-color);
+  font-weight: 400;
+}
+
+.featured__img{
+  width: 180px;
+  margin: 1.5rem 0;
+  transition: .3s;
+}
+
+.featured__price{
+  font-size: var(--h3-font-size);
+}
+
+.featured__button{
+  border: none;
+  outline: none;
+  padding: .75rem 1rem;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  border-radius: 1rem 0 1rem 0;
+  cursor: pointer;
+}
+
+.featured__button i{
+  font-size: 1.25rem;
+}
+
+.featured__card:hover .featured__img{
+  /* Move image up by .25rem by hovered  */
+  transform: translateX(-.25rem);
+}
+/* Active link featured */
+/* .active-featured{
+  background-color: var(--first-color);
+}
+
+.active-featured span,
+.active-featured img{
+  opacity: 1;
+} */
+/*=============== OFFER ===============*/
+.offer{
+  position: relative;
+}
+
+.offer__container{
+  grid-template-rows: max-content 224px;
+}
+
+.offer__bg{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.offer__data,
+.offer__img{
+  position: relative;
+}
+
+.offer__data{
+  text-align: center;
+}
+
+.offer-title{
+  margin-bottom: 2rem;
+}
+
+.offer__description{
+  margin-bottom: 3rem;
+}
+
+.offer__img{
+  position: absolute;
+  max-width: initial;
+  width: 400px;
+  bottom: 2rem;
+  right: -5.5rem;
+}
+/*=============== LOGOS ===============*/
+.logos__img{
+  width: 40px;
+  opacity: .4;
+  transition: .3s;
+}
+
+.logos__container{
+  grid-template-columns: repeat(3, max-content);
+  justify-content: center;
+  /* set space or gap between grid elements */
+  gap: 4rem;
+  align-items: center;
+  padding-bottom: 2rem;
+}
+
+.logos__img:hover{
+  opacity: 1;
+}
+/*=============== FOOTER ===============*/
+.footer{
+  position: relative;
+  overflow: hidden;
+}
+
+.footer .shape__big,
+.footer .shape__small{
+  position: absolute;
+}
+
+.footer .shape__big{
+  width: 300px;
+  height: 300px;
+  left: -12rem;
+  top: 6rem;
+}
+
+.footer .shape__small{
+  right: -13rem;
+  bottom: -6rem;
+}
+
+.footer__container{
+  row-gap: 2.5rem;
+  position: relative;
+}
+
+.footer__logo{
+  display: inline-flex;
+  align-items: center;
+  column-gap: .25rem;
+  color: var(--title-color);
+  font-size: var(--h2-font-size);
+  font-weight: var(--font-semi-bold);
+  margin-bottom: 1.25rem;
+  transition: .3s;
+}
+
+.footer__logo i{
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.footer__logo:hover{
+  color: var(--first-color);
+}
+
+.footer__title{
+  font-size: var(--h3-font-size);
+  margin-bottom: 1.25rem;
+}
+
+.footer__links{
+  display: flex;
+  flex-direction: column;
+  row-gap: .5rem;
+}
+
+.footer__link,
+.footer__social-link{
+  color: var(--text-color);
+  transition: .3s;
+}
+
+.footer__link:hover,
+.footer__social-link:hover{
+  color: var(--title-color);
+}
+
+.footer__social{
+  display: flex;
+  column-gap: 1.5rem;
+}
+
+.footer__social-link{
+  font-size: 1.25rem;
+}
+
+.footer__copy{
+  display: block;
+  margin-top: 4.5rem;
+  text-align: center;
+  font-size: var(--smaller-font-size);
+  color: var(--text-color-light);
+}
+
+a.footer__link {
+  align-items: center;
+  align-self: center;
+  display: flex;
+  column-gap: 0.75rem;
+}
+/*=============== SCROLL BAR ===============*/
+::-webkit-scrollbar{
+  width: .6rem;
+  background-color: hsl(219, 4%, 16%);
+  border-radius: 1rem;
+}
+
+::-webkit-scrollbar-thumb{
+  background-color: hsl(219, 4%, 24%);
+  border-radius: 1rem;
+}
+
+::-webkit-scrollbar-thumb:hover{
+  background-color: hsl(219, 4%, 32%);
+  border-radius: 1rem;
+}
+/*=============== SCROLL UP ===============*/
+.scrollup{
+  position: fixed;
+  right: 1rem;
+  bottom: -30%;
+  background-color: hsla(0, 0%, 100%, .1);
+  display: inline-flex;
+  padding: .45rem;
+  border-radius: .5rem;
+  font-size: 1.15rem;
+  color: var(--white-color);
+  z-index: var(--z-tooltip);
+  transition: .4s;
+}
+
+.scrollup:hover{
+  transform: translateY(-.25rem);
+}
+/* Show Scroll Up*/
+.show-scroll{
+  bottom: 3rem;
+}
+
+/*=============== BREAKPOINTS ===============*/
+/* For small devices */
+@media screen and (max-width: 320px){
+  .container{
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
+  .home__title{
+    width: 293px;
+    margin: 0 auto;
+    text-align: justify;
+    margin-top: -1rem
+  }
+
+  .home__car{
+    column-gap: 2rem;
+  }
+
+  .about__card{
+    width: 150px;
+  }
+
+  .offer__container{
+    grid-template-rows: max-content 180px;
+  }
+
+  .offer__img{
+    width: 340px;
+  }
+
+  .logos__container{
+    gap: 2.5rem;
+  }
+}
+/* Iphone X */
+@media screen and (min-width: 370px) and (max-width:399px) {
+  .home__title{
+    font-size: var(--h3-font-size);
+    margin-bottom: 1rem;
+    /* border: 1px solid coral; */
+    width: 273px;
+    margin: 0 auto;
+    text-align: justify;
+    margin-top: -1rem
+  }
+
+  .home__car {
+    display: flex;
+    /* justify-self: center;
+    justify-content: center; */
+    align-items: center;
+    column-gap: 3rem;
+    /* border: 1px solid coral; */
+    width: 300px;
+    /* margin: 0 auto; */
+  }
+
+  .section{
+    padding: 1rem 0 2rem;
+  }
+
+  .about__card {
+    /* border: 1px solid coral; */
+    width: 290px;
+    position: absolute;
+    /* right: 0; */
+    bottom: -0.5rem;
+    padding: 1rem 0.75rem;
+    text-align: justify;
+    border-radius: 1.25rem;
+    left: 0.3rem;
+    /* margin: auto; */
+  }
+
+  .about__card-title {
+    font-size: var(--h3-font-size);
+    margin-bottom: 1rem;
+    /* filter: blur(0.5px);  */
+    color: hsl(219deg 8% 95%);
+  }
+
+  .popular__dataa li{
+    list-style-type:square;
+    list-style-position:inside;
+  }
+}
+
+/* 400 - 575 */
+@media screen and (min-width: 400px) and (max-width:575px) {
+  .home__title{
+    font-size: var(--h2-font-size);
+    margin-bottom: 1rem;
+    /* border: 1px solid coral; */
+    margin: 0 auto;
+    width: 340px;
+    text-align: justify;
+    margin-top: -3rem;
+  }
+
+  .home__car-data {
+    text-align: center;
+  }
+
+
+}
+
+
+
+/* For medium devices */
+@media screen and (min-width: 576px){
+  .about__group{
+    width: 350px;
+    justify-self: center;
+  }
+
+  .home__title{
+    font-size: var(--h1-font-size);
+    margin-bottom: 1rem;
+    /* border: 1px solid coral; */
+    margin: 0 auto;
+    width: 450px;
+    text-align: justify;
+    margin-top: -3rem;
+  }
+
+  .features__map{
+    left: 0;
+    right: 0;
+  }
+  
+  .featured__content{
+    grid-template-columns: repeat(2, 228px);
+  }
+  
+  .offer__container{
+    grid-template-rows: initial;
+    grid-template-columns: .5fr;
+    justify-content: center;
+  }
+
+  .offer__img{
+    position: relative;
+    bottom: initial;
+    right: initial;
+  }
+
+  .offer__data{
+    margin-bottom: 4rem;
+  }
+}
+
+@media screen and (min-width: 767px){
+  .home__title{
+    font-size: var(--h1-font-size);
+    margin-bottom: 1rem;
+    /* border: 1px solid coral; */
+    margin: 0 auto;
+    width: 550px;
+    text-align: justify;
+    margin-top: -6rem;
+  }
+
+  .section{
+    padding: 3rem 0 2rem;
+  }
+
+  .nav{
+    height: var(--header-height) + 1.5rem;
+  }
+
+  .nav__logo{
+    margin-top: 0.5rem;
+  }
+
+  .nav__menu{
+    margin-top: 0.1rem;
+  }
+
+  .nav__toggle,
+  .nav__close{
+    display: none;
+  }
+
+  .nav__list{
+    flex-direction: row;
+    column-gap: 3rem;
+    padding-top: 0;
+  }
+
+  .nav__link{
+    font-size: var(--normal-font-size);
+    text-transform: initial;
+  }
+
+  .about__container{
+    grid-template-columns: repeat(2, 1fr); 
+  }
+
+  .logos__container{
+    gap: 4rem 8rem;
+  }
+
+  .footer__container{
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about__group {
+    width: 80%;
+    justify-self: center;
+    margin: 0 auto;
+  }
+
+  .about__img {
+    width: 100%;
+    border-radius: 0.5rem;
+    filter: blur(0.5px);
+    margin: 0 auto;
+  }
+
+  .about__card {
+    /* border: 1px solid coral; */
+    width: 75%;
+    position: absolute;
+    /* right: 0; */
+    /* bottom: 5.5rem; */
+    /* padding: 1rem 0.75rem; */
+    text-align: center;
+    border-radius: 1.25rem;
+    margin: auto;
+    left: 1.5rem;
+    bottom: 2.6rem;
+    text-align: justify;
+    /* display: flex; */
+    line-height: 3;
+  }
+
+  .about__card-title {
+    font-size: var(--h3-font-size);
+    margin-bottom: 1rem;
+    /* filter: blur(0.5px);  */
+    color: hsl(219deg 8% 95%);
+  }
+
+  .button {
+    background-color: var(--first-color);
+    color: var(--white-color);
+    padding: 1rem 2rem;
+    border-radius: 0.25rem;
+    /* border: 1px solid coral; */
+    transition: .3s;
+    display: flex;
+    margin: 0 auto;
+    width: 200px;
+    justify-content: center;
+  }
+}
+
+/* For large devices */
+@media screen and (min-width: 968px){
+  .container{
+    margin-left: auto;
+    margin-right: auto;
+  }  
+
+  .home__title{
+    font-size: var(--h1-font-size);
+    margin-bottom: 1rem;
+    /* border: 1px solid coral;  */
+    margin: 0 auto;
+    width: 800px;
+    text-align: justify;
+    margin-top: -1rem;
+  }
+
+  .skills__breakdown{
+    /* column-gap: 0.5rem; */
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    /* align-content: center; */
+  }
+
+  .home__car-data {
+    text-align: center;
+    row-gap: 1.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .home__car-name {
+    font-size: 0.8rem;
+    font-weight: 400;
+    width: 106px;
+    /* border: 1px solid coral; */
+    text-align: left;
+    color: var(--white-color);
+  }
+
+  .ratings{
+    display: flex;
+    column-gap: 0.3rem;
+  }
+
+  .nav__logo{
+    margin-top: 0.5rem;
+    margin-left: 1rem;
+  }
+
+  .nav__menu{
+    margin-top: 0.1rem;
+  }
+
+  .shape__big{
+    width: 500px;
+    height: 500px;
+  }
+
+  .shape__small{
+    width: 400px;
+    height: 400px;
+  }
+
+  .home__container{
+    /* padding: 2rem;  */
+  }
+
+  .home__img{
+    width: 380px;
+  }
+  
+  .home__car{
+    column-gap: 7rem;
+  }
+
+  .home__car-icon{
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .about__container{
+    column-gap: 6rem;
+    align-items: center;
+  }
+
+  .about__group,
+  .about__img{
+    width: 480px;
+  }
+
+  .about__card{
+    width: 198px;
+    padding: 1rem 1.25rem;
+  }
+
+  .about__description{
+    padding-right: 4rem;
+    margin-bottom: 3rem;
+  }
+
+  .popular__container{
+    width: 875px;
+    padding-top: 3rem;
+  }
+
+  .popular__card{
+    width: 258px;
+    border-radius: 1.25rem;
+    margin-bottom: 5rem;
+  }
+
+  .popular__img{
+    width: 180px;
+    margin: .75rem  0 1.25rem 2rem;
+  }
+
+  .features__container{
+    padding: 2rem 0 3rem;
+  }
+
+  .featured__img{
+    width: 200px;
+  }
+
+  .features__card{
+    width: 127px;
+    padding: .75rem 2.5rem;
+  }
+
+  .features__card-1{
+    left: -1rem;
+  }
+
+  .features__card-2{
+    right: -2.5rem;
+  }
+
+  .features__card-3{
+    left: -1rem;
+    bottom: 3rem;
+  }
+
+  .features__map{
+    width: 650px;
+    top: 11rem;
+  }
+
+  .featured__container{
+    padding-bottom: 2.5rem;
+  }
+
+  .featured__filters{
+    column-gap: 2rem;
+    margin-bottom: 4.5rem;
+  }
+
+  .featured__item{
+    width: 52px;
+    height: 52px;
+  }
+
+  .featured__item img{
+    width: 2rem;
+  }
+
+  .featured__content{
+    grid-template-columns: repeat(3, 248px);
+    gap: 4rem;
+  }
+
+  .offer__container{
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 5rem;
+    align-items: center;
+    padding-bottom: 2rem;
+  }
+
+  .offer__data,
+  .offer-title{
+    text-align: initial;
+  }
+
+  .offer__data{
+    margin-bottom: 0;
+  }
+
+  .offer__description{
+    padding-right: 6rem;
+  }
+
+  .offer__img{
+    width: 450px;
+  }
+
+  .logos__container{
+    grid-template-columns: repeat(6, max-content);
+  }
+
+  .logos__img{
+    width: 50px;
+  }
+
+  .footer__container{
+    grid-template-columns: repeat(4, max-content);
+    justify-content: space-between;
+  }
+
+  .footer__logo{
+    column-gap: .5rem;
+  }
+
+  .footer__logo i{
+    font-size: 2rem;
+  }
+
+  .footer__title{
+    margin-bottom: 1.5rem;
+  }
+
+  .footer__links{
+    row-gap: .75rem;
+  }
+
+  .footer__social-link{
+    font-size: 1.5rem;
+  }
+
+  .footer__copy{
+    margin-top: 8rem;
+    padding-bottom: 1rem;
+  }
+
+  .scrollup{
+    right: 3rem;
+    
+  }
+
+  .about__card {
+    /* border: 1px solid coral; */
+    width: 400px;
+    position: absolute;
+    /* right: 0; */
+    /* bottom: 5.5rem; */
+    /* padding: 1rem 0.75rem; */
+    text-align: center;
+    border-radius: 1.25rem;
+    margin: auto;
+    left: 0.8rem;
+    bottom: 0.7rem;
+    text-align: justify;
+    /* display: flex; */
+    line-height: 2;
+  }
+
+  .about__card-title {
+    font-size: var(--h3-font-size);
+    margin-bottom: 1rem;
+    /* filter: blur(0.5px);  */
+    color: hsl(219deg 8% 95%);
+  }
+}
+
+/* Have classes toggled */
+.experience__big{
+  width: 80%;
+  height: 220px;
+  margin: 0 auto;
+  overflow: scroll;
+  list-style-type:square;
+  list-style-position:inside;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+
+}
+
+.experience__big li{
+  list-style-type:square;
+  list-style-position:inside;
+}
